@@ -1,0 +1,36 @@
+name: geryon CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Haskell
+        uses: haskell/actions/setup@v1
+        with:
+          ghc-version: '8.10.7'
+          enable-stack: true
+          stack-version: 'latest'
+      - name: Set up HLint
+        uses: haskell/actions/hlint-setup@v1
+        with:
+          version: '3.3.6'
+
+      # Lint
+      - name: Run HLint
+        uses: haskell/actions/hlint-run@v1
+        with:
+          path: '["src", "test"]'
+          fail-on: warning
+      
+      # Build
+      - name: Build with stack
+        run: stack build
