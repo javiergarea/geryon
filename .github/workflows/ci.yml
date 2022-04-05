@@ -1,4 +1,4 @@
-name: geryon ci
+name: geryon CI
 
 on:
   push:
