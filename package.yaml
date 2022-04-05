@@ -21,24 +21,25 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- Agda == 2.6.2.1
 
 library:
   source-dirs: src
-
-executables:
-  geryon-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - geryon
+  exposed-modules:
+  - Geryon
+  - Geryon.Config
+  - Geryon.Discover
+  - Geryon.Runner
+  - Geryon.Runner.Agda
+  - Geryon.Runner.Eval
+  - Geryon.Translate
+  - Geryon.Translate.HCore
+  - Geryon.Translate.Monadic
+  - Geryon.Util
 
 tests:
   geryon-test:
-    main:                Spec.hs
+    main:                Main.hs
     source-dirs:         test
     ghc-options:
     - -threaded
@@ -46,3 +47,5 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - geryon
+    - tasty
+    - tasty-hunit
