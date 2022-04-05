@@ -28,7 +28,7 @@ jobs:
       - name: Run HLint
         uses: haskell/actions/hlint-run@v1
         with:
-          path: ${{ toJSON(steps.whatever.changed_dirs) }}
+          path: ['src', 'test']
           fail-on: warning
       
       # Build
